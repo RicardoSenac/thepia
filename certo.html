@@ -47,13 +47,14 @@
             margin-bottom: 30px;
         }
 
-        /* BOTÃO */
+        /* BOTÃO TRANSFORMAR EM LINK PARA O CELULAR NÃO BLOQUEAR */
         .music {
             position: relative;
+            display: inline-block;
             padding: 16px 32px;
             background: #ff0000;
             color: white;
-            border: none;
+            text-decoration: none;
             border-radius: 50px;
             font-size: 20px;
             font-weight: bold;
@@ -79,26 +80,26 @@
         }
 
         .photo1 {
-            top: 20px;
-            left: 20px;
+            top: 180px;
+            left: 180px;
             transform: rotate(-7deg);
         }
 
         .photo2 {
-            top: 20px;
-            right: 20px;
+            top: 180px;
+            right: 180px;
             transform: rotate(7deg);
         }
 
         .photo3 {
-            bottom: 20px;
-            left: 20px;
+            bottom: 180px;
+            left: 180px;
             transform: rotate(7deg);
         }
 
         .photo4 {
-            bottom: 20px;
-            right: 20px;
+            bottom: 180px;
+            right: 180px;
             transform: rotate(-7deg);
         }
 
@@ -146,9 +147,10 @@
             Se continua me amando, clica aqui👇
         </p>
 
-        <button class="music" id="musicButton">
+        <!-- O BOTÃO AGORA É UM LINK <a> PARA O CELULAR PERMITIR A ABERTURA DO YOUTUBE -->
+        <a href="https://youtu.be/3vj5HNChZvA?si=N5ARx74FTyOzOZre" target="_blank" class="music" id="musicButton">
             💗 CLIQUE AQUI 💗
-        </button>
+        </a>
     </div>
 
     <!-- FOTOS NOS QUATRO CANTOS -->
@@ -192,12 +194,14 @@
         button.addEventListener("mouseenter", fugir);
         button.addEventListener("touchstart", fugir);
 
-        button.addEventListener("click", function () {
-            if (tentativas >= 5) {
+        button.addEventListener("click", function (e) {
+            if (tentativas < 5) {
+                e.preventDefault(); // Impede o clique se ainda estiver fugindo
+            } else {
                 // Muda o texto para "error"
                 document.getElementById("texto-pergunta").innerText = "error";
 
-                // Cria várias imagens subindo (substitua 'foto6.jpeg' pela foto que quiser)
+                // Dispara a foto10.png subindo pela tela
                 for (let i = 0; i < 5; i++) {
                     setTimeout(() => {
                         const imgSubindo = document.createElement("img");
@@ -213,11 +217,7 @@
                         }, 3000);
                     }, i * 300);
                 }
-
-                // Abre a música no YouTube após um breve delay
-                setTimeout(() => {
-                    window.open("https://youtu.be/3vj5HNChZvA?si=N5ARx74FTyOzOZre", "_blank");
-                }, 1500);
+                // Como agora é um link <a> legítimo, o YouTube abre direto no celular junto com a animação!
             }
         });
     </script>
