@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caiu no bait ❤️</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #ffc0cb;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .container {
+            padding: 30px;
+            max-width: 600px;
+            z-index: 10;
+        }
+
+        .emoji {
+            font-size: 70px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            color: #ff0000;
+            font-size: 42px;
+            margin-bottom: 20px;
+        }
+
+        p {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 30px;
+        }
+
+        /* BOTÃO */
+        .music {
+            position: relative;
+            padding: 16px 32px;
+            background: #ff0000;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+            transition: transform 0.2s;
+        }
+
+        .music:hover {
+            transform: scale(1.08);
+        }
+        
+        /* FOTOS NOS QUATRO CANTOS */
+        .photo {
+            position: fixed;
+            width: 180px;  
+            height: 180px; 
+            object-fit: cover;
+            border-radius: 18px;
+            border: 4px solid white;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            z-index: 5;
+        }
+
+        .photo1 {
+            top: 20px;
+            left: 20px;
+            transform: rotate(-7deg);
+        }
+
+        .photo2 {
+            top: 20px;
+            right: 20px;
+            transform: rotate(7deg);
+        }
+
+        .photo3 {
+            bottom: 20px;
+            left: 20px;
+            transform: rotate(7deg);
+        }
+
+        .photo4 {
+            bottom: 20px;
+            right: 20px;
+            transform: rotate(-7deg);
+        }
+
+        /* ANIMAÇÃO DA IMAGEM SUBINDO */
+        @keyframes subirFlutuar {
+            0% {
+                bottom: 0px;
+                opacity: 1;
+                transform: scale(0.5) rotate(0deg);
+            }
+            100% {
+                bottom: 105vh;
+                opacity: 0;
+                transform: scale(1.2) rotate(20deg);
+            }
+        }
+
+        .floating-img {
+            position: fixed;
+            bottom: 0px;
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            animation: subirFlutuar 3s linear forwards;
+            z-index: 20;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="emoji">
+            🫥🫥🫥🫥🫥
+        </div>
+
+        <h1>
+            CAIU NO BAIT KKKKKKK
+        </h1>
+
+        <p id="texto-pergunta">
+            Se continua me amando, clica aqui👇
+        </p>
+
+        <button class="music" id="musicButton">
+            💗 CLIQUE AQUI 💗
+        </button>
+    </div>
+
+    <!-- FOTOS NOS QUATRO CANTOS -->
+    <div class="photos">
+        <img src="foto5.jpeg" class="photo photo1">
+        <img src="foto6.jpeg" class="photo photo2">
+        <img src="foto7.jpeg" class="photo photo3">
+        <img src="foto8.jpeg" class="photo photo4">
+    </div>
+
+    <script>
+        const button = document.getElementById("musicButton");
+        let tentativas = 0;
+
+        function fugir(e) {
+            if (tentativas < 5) {
+                tentativas++;
+                
+                if (e.type === "touchstart") {
+                    e.preventDefault();
+                }
+
+                button.style.position = "fixed";
+
+                const largura = window.innerWidth - button.offsetWidth - 50;
+                const altura = window.innerHeight - button.offsetHeight - 50;
+
+                const novaEsquerda = Math.random() * largura;
+                const novoTopo = Math.random() * altura;
+
+                button.style.left = Math.max(200, novaEsquerda) + "px";
+                button.style.top = Math.max(100, novoTopo) + "px";
+            } else {
+                button.innerText = "💗 AGORA PODE CLICAR 💗";
+                button.style.position = "relative";
+                button.style.left = "auto";
+                button.style.top = "auto";
+            }
+        }
+
+        button.addEventListener("mouseenter", fugir);
+        button.addEventListener("touchstart", fugir);
+
+        button.addEventListener("click", function () {
+            if (tentativas >= 5) {
+                // Muda o texto para "error"
+                document.getElementById("texto-pergunta").innerText = "error";
+
+                // Cria várias imagens subindo (substitua 'foto6.jpeg' pela foto que quiser)
+                for (let i = 0; i < 5; i++) {
+                    setTimeout(() => {
+                        const imgSubindo = document.createElement("img");
+                        imgSubindo.src = "foto10.png"; 
+                        imgSubindo.className = "floating-img";
+                        
+                        imgSubindo.style.left = Math.random() * (window.innerWidth - 100) + "px";
+                        
+                        document.body.appendChild(imgSubindo);
+
+                        setTimeout(() => {
+                            imgSubindo.remove();
+                        }, 3000);
+                    }, i * 300);
+                }
+
+                // Abre a música no YouTube após um breve delay
+                setTimeout(() => {
+                    window.open("https://youtu.be/3vj5HNChZvA?si=N5ARx74FTyOzOZre", "_blank");
+                }, 1500);
+            }
+        });
+    </script>
+
+</body>
+</html>
